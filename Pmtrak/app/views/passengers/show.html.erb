@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @passenger.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @passenger.email %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @passenger.password %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @passenger.phone_number %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @passenger.address %>
+</p>
+
+<p>
+  <strong>Credit number:</strong>
+  <%= @passenger.credit_number %>
+</p>
+
+<%= link_to 'Edit', edit_passenger_path(@passenger) %> |
+<%= link_to 'Back', passengers_path %>
