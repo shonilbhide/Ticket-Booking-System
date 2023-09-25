@@ -15,7 +15,6 @@ class TicketsTest < ApplicationSystemTestCase
     click_on "New Ticket"
 
     fill_in "Confirmation number", with: @ticket.confirmation_number
-    fill_in "Passenger", with: @ticket.passenger_id
     click_on "Create Ticket"
 
     assert_text "Ticket was successfully created"
@@ -27,7 +26,6 @@ class TicketsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Confirmation number", with: @ticket.confirmation_number
-    fill_in "Passenger", with: @ticket.passenger_id
     click_on "Update Ticket"
 
     assert_text "Ticket was successfully updated"

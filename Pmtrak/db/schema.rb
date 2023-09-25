@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_19_230359) do
+ActiveRecord::Schema.define(version: 2023_09_25_164100) do
 
   create_table "admins", force: :cascade do |t|
     t.string "username"
@@ -22,6 +22,38 @@ ActiveRecord::Schema.define(version: 2023_09_19_230359) do
     t.string "credit_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "passengers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password"
+    t.string "phone_number"
+    t.string "address"
+    t.string "credit_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating"
+    t.string "feedback"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "passenger_id", null: false
+    t.integer "train_id", null: false
+    t.index ["passenger_id"], name: "index_reviews_on_passenger_id"
+    t.index ["train_id"], name: "index_reviews_on_train_id"
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.integer "confirmation_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "passenger_id", null: false
+    t.integer "train_id", null: false
+    t.index ["passenger_id"], name: "index_tickets_on_passenger_id"
+    t.index ["train_id"], name: "index_tickets_on_train_id"
   end
 
   create_table "trains", force: :cascade do |t|
@@ -39,4 +71,8 @@ ActiveRecord::Schema.define(version: 2023_09_19_230359) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "reviews", "passengers"
+  add_foreign_key "reviews", "trains"
+  add_foreign_key "tickets", "passengers"
+  add_foreign_key "tickets", "trains"
 end
