@@ -58,6 +58,7 @@ class PassengersController < ApplicationController
   end
 
   def login
+    
   end
 
   private

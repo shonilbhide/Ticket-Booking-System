@@ -1,5 +1,5 @@
 class Passenger < ApplicationRecord
-    has_secured_password
+    has_secure_password
 
     has_many :tickets
     has_many :reviews

@@ -1,9 +1,9 @@
 <h2>Login</h2>
-<%= form_tag '/login' do%>
+<%= form_tag 'passenger#login' do%>
     Username: <%= text_field_tag :email%><br>
     Password: <%= password_field_tag :password%>
     <%= submit_tag "Login"%>
-    <%= link_to "Sign up" login_passenger_path%>
-    <%= link_to "Admin?" admins_path%>
+    <%= link_to "Sign up", new_passenger_path%>
+    <%= link_to "Admin?", admins_path%>
 <% end %>
 

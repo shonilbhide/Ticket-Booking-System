@@ -18,7 +18,7 @@ class AdminsTest < ApplicationSystemTestCase
     fill_in "Credit number", with: @admin.credit_number
     fill_in "Email", with: @admin.email
     fill_in "Name", with: @admin.name
-    fill_in "Password", with: @admin.password
+    fill_in "Password", with: @admin.password_digest
     fill_in "Phone number", with: @admin.phone_number
     fill_in "Username", with: @admin.username
     click_on "Create Admin"
@@ -35,7 +35,7 @@ class AdminsTest < ApplicationSystemTestCase
     fill_in "Credit number", with: @admin.credit_number
     fill_in "Email", with: @admin.email
     fill_in "Name", with: @admin.name
-    fill_in "Password", with: @admin.password
+    fill_in "Password", with: @admin.password_digest
     fill_in "Phone number", with: @admin.phone_number
     fill_in "Username", with: @admin.username
     click_on "Update Admin"
