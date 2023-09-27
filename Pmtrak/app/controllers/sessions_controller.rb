@@ -1,22 +1,49 @@
+# class SessionsController < ApplicationController
+#   skip_before_action :authorized, only: [:new, :create]
+#   def new
+#   end
+#
+#   def create
+#     user = Admin.find_by_email(params[:email])
+#     if user && user.authenticate(params[:password])
+#       session[:admin_id] = user.id
+#       redirect_to admin_path
+#     elsif
+#       user = Passenger.find_by_email(params[:email])
+#       if user && user.authenticate(params[:password])
+#         session[:passenger_id] = user.id
+#         redirect_to passengers_path
+#       else
+#         flash.now[:alert] = "Email or password is invalid"
+#         render "new"
+#       end
+#     else
+#       flash.now[:alert] = "Email or password is invalid"
+#       render "new"
+#     end
+#   end
+#
+#   def destroy
+#     session[:user_id] = nil
+#     redirect_to root_url
+#   end
+# end
 class SessionsController < ApplicationController
   skip_before_action :authorized, only: [:new, :create]
+
   def new
   end
 
   def create
-    user = Admin.find_by_email(params[:email])
-    if user && user.authenticate(params[:password])
-      session[:admin_id] = user.id
-      redirect_to admin_path
-    elsif
-      user = Passenger.find_by_email(params[:email])
-      if user && user.authenticate(params[:password])
-        session[:passenger_id] = user.id
-        redirect_to passengers_path
-      else
-        flash.now[:alert] = "Email or password is invalid"
-        render "new"
-      end
+    admin = Admin.find_by_email(params[:email])
+    passenger = Passenger.find_by_email(params[:email])
+
+    if admin && admin.authenticate(params[:password])
+      session[:admin_id] = admin.id
+      redirect_to root_path, notice: "Admin logged in successfully."
+    elsif passenger && passenger.authenticate(params[:password])
+      session[:passenger_id] = passenger.id
+      redirect_to root_path, notice: "Passenger logged in successfully."
     else
       flash.now[:alert] = "Email or password is invalid"
       render "new"
@@ -24,7 +51,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    session[:admin_id] = nil
+    session[:passenger_id] = nil
     redirect_to root_url
   end
 end

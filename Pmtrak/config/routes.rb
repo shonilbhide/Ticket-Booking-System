@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :reviews
   resources :trains
   resources :admins
+  resources :products
+  resources :credit_cards
+  resources :transactions
   root 'home#index'
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: "passengers#new", as: 'signup'

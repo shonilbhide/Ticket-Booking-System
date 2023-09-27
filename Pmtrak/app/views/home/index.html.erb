@@ -1,16 +1,39 @@
-<p id=”notice”><%= notice %></p>
-<h1>Login with your credentials</h1>
-<!-- <% if current_user %>
-  Logged in as <%= current_user.name %>.
-  <br>
-   <%= link_to 'View all products', products_path %><br>
-   <%= link_to 'Add credit card', new_credit_card_path %><br>
-   <%= link_to 'View purchase history', transactions_path %><br>
-   <%= link_to 'Logout', logout_path %><br>
-<% else %> %-->
+<p id="notice"><%= notice %></p>
+
+<% if current_user %>
+  <h1>Welcome, <%= current_user.name %>!</h1>
+
+  <h2>Available Trains</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Train Number</th>
+      <th>Departure Station</th>
+      <th>Termination Station</th>
+      <th>Departure Date</th>
+      <th>Departure Time</th>
+      <th>Arrival Date</th>
+      <th>Arrival Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @trains.each do |train| %>
+      <tr>
+        <td><%= train.train_number %></td>
+        <td><%= train.departure_station %></td>
+        <td><%= train.termination_station %></td>
+        <td><%= train.departure_date %></td>
+        <td><%= train.departure_time %></td>
+        <td><%= train.arrival_date %></td>
+        <td><%= train.arrival_time %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'Logout', logout_path %><br>
+<% else %>
+  <h1>Login with your credentials</h1>
   <%= link_to "Signup", signup_path %> or
   <%= link_to "Login", login_path %>
-
 <% end %>
-
-
