@@ -78,6 +78,100 @@
     <% end %>
   </tbody>
 </table>
+
+<h2>Search Trains by Departure Station</h2>
+<%= form_with url: admin_path(@admin), method: :get, local: true do %>
+  <%= text_field_tag :search_by_departure %>
+  <%= submit_tag "Search" %>
+<% end %>
+<% if params[:search_by_departure].present? %>
+  <h3>Trains by Departure <%= params[:search_by_departure] %></h3>
+  <% if @trains_by_departure.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Train Number</th>
+          <th>Departure Station</th>
+          <th>Termination Station</th>
+          <th>Departure Date</th>
+          <th>Departure Time</th>
+          <th>Arrival Date</th>
+          <th>Arrival Time</th>
+          <th>Ticket Price</th>
+          <th>Seats Left</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @trains_by_departure.each do |train| %>
+        <tr>
+          <td><%= train.train_number %></td>
+          <td><%= train.departure_station %></td>
+          <td><%= train.termination_station %></td>
+          <td><%= train.departure_date %></td>
+          <td><%= train.departure_time.strftime("%H:%M:%S %Z") %></td>
+          <td><%= train.arrival_date %></td>
+          <td><%= train.arrival_time.strftime("%H:%M:%S %Z") %></td>
+          <td><%= train.ticket_price %></td>
+          <td><%= train.seats_left %></td>
+          <td><%= link_to 'Show', train %></td>
+          <td><%= link_to 'Edit', edit_train_path(train) %></td>
+          <td><%= link_to 'Destroy', train, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No trains found.</p>
+  <% end %>
+<% end %>
+
+<h2>Search Trains by Termination Station</h2>
+<%= form_with url: admin_path(@admin), method: :get, local: true do %>
+  <%= text_field_tag :search_by_termination %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if params[:search_by_termination].present? %>
+  <h3>Trains by Termination Station <%= params[:search_by_termination] %></h3>
+  <% if @trains_by_termination.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Train Number</th>
+          <th>Departure Station</th>
+          <th>Termination Station</th>
+          <th>Departure Date</th>
+          <th>Departure Time</th>
+          <th>Arrival Date</th>
+          <th>Arrival Time</th>
+          <th>Ticket Price</th>
+          <th>Seats Left</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @trains_by_termination.each do |train| %>
+        <tr>
+          <td><%= train.train_number %></td>
+          <td><%= train.departure_station %></td>
+          <td><%= train.termination_station %></td>
+          <td><%= train.departure_date %></td>
+          <td><%= train.departure_time.strftime("%H:%M:%S %Z") %></td>
+          <td><%= train.arrival_date %></td>
+          <td><%= train.arrival_time.strftime("%H:%M:%S %Z") %></td>
+          <td><%= train.ticket_price %></td>
+          <td><%= train.seats_left %></td>
+          <td><%= link_to 'Show', train %></td>
+          <td><%= link_to 'Edit', edit_train_path(train) %></td>
+          <td><%= link_to 'Destroy', train, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No trains found.</p>
+  <% end %>
+<% end %>
+
 <%= link_to 'Add New Passengers', new_passenger_path %>
 <br>
 <%= link_to 'Show all reviews', reviews_path %>

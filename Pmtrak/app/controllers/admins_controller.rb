@@ -15,6 +15,18 @@ class AdminsController < ApplicationController
     # else
     @trains = Train.all.order([:departure_station, termination_station: :desc])
 
+    if params[:search_by_departure].present?
+      @trains_by_departure = [Train.find_by(departure_station: params[:search_by_departure])]
+    else
+      @trains_by_departure = @trains
+    end
+
+    if params[:search_by_termination].present?
+      @trains_by_termination = [Train.find_by(termination_station: params[:search_by_termination])]
+    else
+      @trains_by_termination = @trains
+    end
+
   end
 
   def display
