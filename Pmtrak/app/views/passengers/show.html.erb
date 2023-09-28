@@ -72,5 +72,46 @@
   </tbody>
 </table>
 
+<h2>Search Reviews by User</h2>
+<%= form_with url: passenger_path(@passenger), method: :get, local: true do %>
+  <%= text_field_tag :search_by_user_name %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if params[:search_by_user_name].present? %>
+  <h3>Reviews by <%= params[:search_by_user_name] %></h3>
+  <% if @reviews_by_user.any? %>
+    <ul>
+      <% @reviews_by_user.each do |review| %>
+        <li>
+          Train Number: <%= review.train.train_number %> ｜
+          Review: <%= review.feedback %> ｜
+          Rating: <%= review.rating %>/5
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No reviews found.</p>
+  <% end %>
+<% end %>
+
+<h2>Search Reviews by Train Number</h2>
+<%= form_with url: passenger_path(@passenger), method: :get, local: true do %>
+  <%= text_field_tag :search_by_train_number %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if params[:search_by_train_number].present? %>
+  <h3>Reviews for Train Number <%= params[:search_by_train_number] %></h3>
+  <% if @reviews_for_trains.any? && @reviews_for_trains.first[:reviews].any? %>
+    <ul>
+      <% @reviews_for_trains.first[:reviews].each do |review| %>
+        <li><%= review.feedback %> - <%= review.rating %>/5</li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No reviews found.</p>
+  <% end %>
+<% end %>
 
 <%= link_to 'My Trips', my_trips_passenger_path(@passenger) %>

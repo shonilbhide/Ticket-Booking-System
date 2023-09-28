@@ -15,6 +15,11 @@ class TrainsController < ApplicationController
     @train = Train.new
   end
 
+  def train_reviews
+    @train = Train.find(params[:id])
+    @reviews = @train.reviews
+  end
+
   # GET /trains/1/edit
   def edit
   end

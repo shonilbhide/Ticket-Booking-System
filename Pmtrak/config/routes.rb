@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   end
   resources :passengers do
     get 'my_trips', on: :member
+    get 'user_reviews', on: :member
   end
   resources :reviews
   resources :trains do
     resources :reviews
+    get 'train_reviews', on: :member
   end
   resources :admins
   resources :products

@@ -1,0 +1,20 @@
+<h2>Reviews by <%= @passenger.name %></h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Train Number</th>
+    <th>Rating</th>
+    <th>Feedback</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @reviews.each do |review| %>
+    <tr>
+      <td><%= review.train.train_number %></td>
+      <td><%= review.rating %></td>
+      <td><%= review.feedback %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

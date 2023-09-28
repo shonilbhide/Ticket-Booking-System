@@ -13,6 +13,11 @@ class PassengersController < ApplicationController
     @reviews = Review.where(passenger: @passenger)
   end
 
+  def user_reviews
+    @passenger = Passenger.find(params[:id])
+    @reviews = @passenger.reviews
+  end
+
 
   # GET /passengers/new
   def new
@@ -61,9 +66,29 @@ class PassengersController < ApplicationController
     end
   end
 
+  # def show
+  #   @booked_trains = @passenger.tickets.includes(:train).map(&:train)
+  #   @trains = Train.all
+  #   @reviews_by_user = Review.where(passenger: @passenger)
+  #   @reviews_for_trains = @booked_trains.map { |train| {train: train, reviews: train.reviews} }
+  # end
   def show
     @booked_trains = @passenger.tickets.includes(:train).map(&:train)
     @trains = Train.all
+
+    if params[:search_by_user_name].present?
+      user = Passenger.find_by(name: params[:search_by_user_name])
+      @reviews_by_user = user&.reviews || []
+    else
+      @reviews_by_user = @passenger.reviews
+    end
+
+    if params[:search_by_train_number].present?
+      train = Train.find_by(train_number: params[:search_by_train_number])
+      @reviews_for_trains = [{train: train, reviews: train&.reviews || []}]
+    else
+      @reviews_for_trains = @booked_trains.map { |train| {train: train, reviews: train.reviews} }
+    end
   end
 
   def login
