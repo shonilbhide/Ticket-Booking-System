@@ -114,4 +114,98 @@
   <% end %>
 <% end %>
 
+<h2>Search Trains by Departure</h2>
+<%= form_with url: passenger_path(@passenger), method: :get, local: true do %>
+  <%= text_field_tag :search_by_departure %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if params[:search_by_departure].present? %>
+  <h3>Trains by Departure <%= params[:search_by_departure] %></h3>
+  <% if @trains_by_departure.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Train Number</th>
+          <th>Departure Station</th>
+          <th>Termination Station</th>
+          <th>Departure Date</th>
+          <th>Departure Time</th>
+          <th>Arrival Date</th>
+          <th>Arrival Time</th>
+          <th>Ticket Price</th>
+          <th>Seats Left</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @trains_by_departure.each do |train| %>
+        <tr>
+          <td><%= train.train_number %></td>
+          <td><%= train.departure_station %></td>
+          <td><%= train.termination_station %></td>
+          <td><%= train.departure_date %></td>
+          <td><%= train.departure_time.strftime("%H:%M:%S %Z") %></td>
+          <td><%= train.arrival_date %></td>
+          <td><%= train.arrival_time.strftime("%H:%M:%S %Z") %></td>
+          <td><%= train.ticket_price %></td>
+          <td><%= train.seats_left %></td>
+          <% if train.seats_left > 0 %>
+            <td><%= link_to 'Book', book_tickets_path(train_id: train.id), method: :post %></td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No trains found.</p>
+  <% end %>
+<% end %>
+
+<h2>Search Trains by Arrival</h2>
+<%= form_with url: passenger_path(@passenger), method: :get, local: true do %>
+  <%= text_field_tag :search_by_arrival %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if params[:search_by_arrival].present? %>
+  <h3>Trains by Arrival <%= params[:search_by_arrival] %></h3>
+  <% if @trains_by_arrival.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Train Number</th>
+          <th>Departure Station</th>
+          <th>Termination Station</th>
+          <th>Departure Date</th>
+          <th>Departure Time</th>
+          <th>Arrival Date</th>
+          <th>Arrival Time</th>
+          <th>Ticket Price</th>
+          <th>Seats Left</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @trains_by_arrival.each do |train| %>
+        <tr>
+          <td><%= train.train_number %></td>
+          <td><%= train.departure_station %></td>
+          <td><%= train.termination_station %></td>
+          <td><%= train.departure_date %></td>
+          <td><%= train.departure_time.strftime("%H:%M:%S %Z") %></td>
+          <td><%= train.arrival_date %></td>
+          <td><%= train.arrival_time.strftime("%H:%M:%S %Z") %></td>
+          <td><%= train.ticket_price %></td>
+          <td><%= train.seats_left %></td>
+          <% if train.seats_left > 0 %>
+            <td><%= link_to 'Book', book_tickets_path(train_id: train.id), method: :post %></td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No trains found.</p>
+  <% end %>
+<% end %>
+
 <%= link_to 'My Trips', my_trips_passenger_path(@passenger) %>

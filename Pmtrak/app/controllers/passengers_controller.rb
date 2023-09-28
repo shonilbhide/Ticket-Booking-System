@@ -89,6 +89,18 @@ class PassengersController < ApplicationController
     else
       @reviews_for_trains = @booked_trains.map { |train| {train: train, reviews: train.reviews} }
     end
+
+    if params[:search_by_departure].present?
+      @trains_by_departure = [Train.find_by(departure_station: params[:search_by_departure])]
+    else
+      @trains_by_departure = @booked_trains
+    end
+
+    if params[:search_by_arrival].present?
+      @trains_by_arrival = [Train.find_by(termination_station: params[:search_by_arrival])]
+    else
+      @trains_by_arrival = @booked_trains
+    end
   end
 
   def login
