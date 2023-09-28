@@ -6,9 +6,12 @@ class PassengersController < ApplicationController
     @passengers = Passenger.all
   end
 
-  # GET /passengers/1 or /passengers/1.json
-  def show
+  def my_trips
+    @passenger = Passenger.find(params[:id])
+    @booked_trains = @passenger.tickets.includes(:train).map(&:train)
+    @reviews = Review.where(passenger: @passenger)
   end
+
 
   # GET /passengers/new
   def new
@@ -50,11 +53,16 @@ class PassengersController < ApplicationController
   # DELETE /passengers/1 or /passengers/1.json
   def destroy
     @passenger.destroy
-
+    session[:passenger_id] = nil
     respond_to do |format|
-      format.html { redirect_to passengers_url, notice: "Passenger was successfully destroyed." }
+      format.html { redirect_to root_url, notice: "Passenger was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def show
+    @booked_trains = @passenger.tickets.includes(:train).map(&:train)
+    @trains = Train.all
   end
 
   def login
@@ -63,11 +71,19 @@ class PassengersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_passenger
+    # def set_passenger
+    #   @passenger = Passenger.find(params[:id])
+    # end
+
+  def set_passenger
+    if current_user.is_a?(Passenger)
+      @passenger = current_user
+    else
       @passenger = Passenger.find(params[:id])
     end
+  end
 
-    # Only allow a list of trusted parameters through.
+  # Only allow a list of trusted parameters through.
     def passenger_params
       params.require(:passenger).permit(:name, :email, :password, :phone_number, :address, :credit_number)
     end

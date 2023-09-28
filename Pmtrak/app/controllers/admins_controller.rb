@@ -3,7 +3,12 @@ class AdminsController < ApplicationController
 
   # GET /admins or /admins.json
   def index
-    @admins = Admin.all
+    @admin = Admin.first
+    @passengers = Passenger.all
+    # if params[:search]
+    #   @trains = Train.where("column_name LIKE ?", "%#{params[:search]}%")
+    # else
+    @trains = Train.all.order([:departure_station, termination_station: :desc])
   end
 
   # GET /admins/1 or /admins/1.json

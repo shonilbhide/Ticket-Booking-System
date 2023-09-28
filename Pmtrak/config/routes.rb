@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
-  resources :tickets
-  resources :passengers
+  resources :tickets, only: [:destroy] do
+    post 'book', on: :collection
+  end
+  resources :passengers do
+    get 'my_trips', on: :member
+  end
   resources :reviews
-  resources :trains
+  resources :trains do
+    resources :reviews
+  end
   resources :admins
   resources :products
   resources :credit_cards
