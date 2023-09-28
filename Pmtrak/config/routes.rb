@@ -11,7 +11,13 @@ Rails.application.routes.draw do
     resources :reviews
     get 'train_reviews', on: :member
   end
-  resources :admins 
+  resources :tickets, only: [:edit]
+  resources :admins, except: :index do
+    get 'show_passengers', on: :member
+    get 'show_trains', on: :member
+    get 'show_tickets', on: :member
+    get 'show_reviews', on: :member
+  end
   get 'display', to: "admins#display", as: 'display_admin'
   resources :products
   resources :credit_cards

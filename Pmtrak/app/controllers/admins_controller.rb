@@ -3,34 +3,19 @@ class AdminsController < ApplicationController
 
   # GET /admins or /admins.json
   def index
-    @admin = Admin.first
+    @admin = set_admin
   end
 
   # GET /admins/1 or /admins/1.json
   def show
-    @admin = Admin.first
-    @passengers = Passenger.all
+    @admin = set_admin
     # if params[:search]
     #   @trains = Train.where("column_name LIKE ?", "%#{params[:search]}%")
     # else
-    @trains = Train.all.order([:departure_station, termination_station: :desc])
-
-    if params[:search_by_departure].present?
-      @trains_by_departure = Train.where(departure_station: params[:search_by_departure])
-    else
-      @trains_by_departure = @trains
-    end
-
-    if params[:search_by_termination].present?
-      @trains_by_termination = Train.where(termination_station: params[:search_by_termination])
-    else
-      @trains_by_termination = @trains
-    end
-
   end
 
   def display
-    @admin = Admin.first
+    @admin = set_admin
   end
 
   # GET /admins/new
@@ -79,6 +64,48 @@ class AdminsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def show_trains
+    @admin = set_admin
+    @trains = Train.all.order([:departure_station, termination_station: :desc])
+
+    if params[:search_by_departure].present?
+      @trains_by_departure = Train.where(departure_station: params[:search_by_departure])
+    else
+      @trains_by_departure = @trains
+    end
+
+    if params[:search_by_termination].present?
+      @trains_by_termination = Train.where(termination_station: params[:search_by_termination])
+    else
+      @trains_by_termination = @trains
+    end
+  end
+
+  def show_passengers
+    @admin = set_admin
+    @passengers = Passenger.all
+  end
+
+  def show_tickets
+    @admin = set_admin
+    @tickets = Ticket.all
+  end
+
+  def show_reviews
+    @admin = set_admin
+    @reviews = Review.all
+    if params[:search_by_user_name].present?
+      user = Passenger.find_by(name: params[:search_by_user_name])
+      @reviews = user&.reviews || []
+    end
+    if params[:search_by_train_number].present?
+      train = Train.find_by(train_number: params[:search_by_train_number])
+      @reviews = [{train: train, reviews: train&.reviews || []}]
+    end
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

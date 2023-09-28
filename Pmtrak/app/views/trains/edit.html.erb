@@ -3,4 +3,4 @@
 <%= render 'form', train: @train %>
 
 <%= link_to 'Show', @train %> |
-<%= link_to 'Back', admin_path(current_user) %>
+<%= link_to 'Back', show_trains_admin_path(@current_user) %>

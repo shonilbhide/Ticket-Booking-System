@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1/edit
   def edit
-    if @review.passenger != current_user
+    if (@review.passenger != current_user) && (current_user.class != Admin)
       redirect_to my_trips_passenger_path(@passenger), alert: "You can only edit your own reviews."
     end
   end

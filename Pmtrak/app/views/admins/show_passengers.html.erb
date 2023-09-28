@@ -1,17 +1,12 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Passengers</h1>
-
+<h4>Available Passengers</h4>
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Email</th>
-      <th>Password</th>
       <th>Phone number</th>
       <th>Address</th>
-      <th>Credit number</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -20,11 +15,8 @@
       <tr>
         <td><%= passenger.name %></td>
         <td><%= passenger.email %></td>
-        <td><%= passenger.password %></td>
         <td><%= passenger.phone_number %></td>
         <td><%= passenger.address %></td>
-        <td><%= passenger.credit_number %></td>
-        <td><%= link_to 'Show', passenger %></td>
         <td><%= link_to 'Edit', edit_passenger_path(passenger) %></td>
         <td><%= link_to 'Destroy', passenger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -32,8 +24,6 @@
   </tbody>
 </table>
 
+<%= link_to 'Add New Passengers', new_passenger_path(@admin) %>
 <br>
-
-
-<%= link_to 'Back', admin_path(@current_user) %>
-<br>
+<%= link_to 'Back', admin_path(current_user) %>

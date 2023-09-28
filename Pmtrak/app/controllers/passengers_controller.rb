@@ -21,6 +21,7 @@ class PassengersController < ApplicationController
 
   # GET /passengers/new
   def new
+    @admin = Admin.first
     @passenger = Passenger.new
   end
 
