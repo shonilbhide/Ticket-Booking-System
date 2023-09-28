@@ -91,13 +91,13 @@ class PassengersController < ApplicationController
     end
 
     if params[:search_by_departure].present?
-      @trains_by_departure = [Train.find_by(departure_station: params[:search_by_departure])]
+      @trains_by_departure = Train.where(departure_station: params[:search_by_departure])
     else
       @trains_by_departure = @booked_trains
     end
 
     if params[:search_by_arrival].present?
-      @trains_by_arrival = [Train.find_by(termination_station: params[:search_by_arrival])]
+      @trains_by_arrival = Train.where(termination_station: params[:search_by_arrival])
     else
       @trains_by_arrival = @booked_trains
     end
