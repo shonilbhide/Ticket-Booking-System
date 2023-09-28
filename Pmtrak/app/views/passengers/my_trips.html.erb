@@ -1,0 +1,74 @@
+<h2> My Trips </h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Train Number</th>
+    <th>Departure Station</th>
+    <th>Termination Station</th>
+    <th>Departure Date</th>
+    <th>Departure Time</th>
+    <th>Arrival Date</th>
+    <th>Arrival Time</th>
+    <th>Ticket Price</th>
+    <th>Seats Left</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @booked_trains.each do |train| %>
+    <tr>
+      <td><%= train.train_number %></td>
+      <td><%= train.departure_station %></td>
+      <td><%= train.termination_station %></td>
+      <td><%= train.departure_date %></td>
+      <td><%= train.departure_time.strftime("%H:%M:%S %Z") %></td>
+      <td><%= train.arrival_date %></td>
+      <td><%= train.arrival_time.strftime("%H:%M:%S %Z") %></td>
+      <td><%= train.ticket_price %></td>
+      <td><%= train.seats_left %></td>
+      <td>
+        <%= link_to 'Cancel', ticket_path(train.tickets.find_by(passenger: @passenger)), method: :delete, data: { confirm: 'Are you sure you want to cancel this trip?' } %>
+        <!-- Review Form -->
+        <h3>Review for Train <%= train.train_number %></h3>
+        <%= form_with(model: [train, Review.new], local: true) do |form| %>
+          <%= form.hidden_field :passenger_id, value: current_user.id %>
+          <%= form.label :rating %>
+          <%= form.number_field :rating, in: 1..5 %>
+          <%= form.label :feedback %>
+          <%= form.text_area :feedback %>
+          <%= form.submit 'Submit Review' %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h2>My Reviews</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Train Number</th>
+    <th>Rating</th>
+    <th>Feedback</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @reviews.each do |review| %>
+    <tr>
+      <td><%= review.train.train_number %></td>
+      <td><%= review.rating %></td>
+      <td><%= review.feedback %></td>
+      <td>
+        <%= link_to 'Edit', edit_review_path(review) %> |
+        <%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', passenger_path(current_user) %>
+

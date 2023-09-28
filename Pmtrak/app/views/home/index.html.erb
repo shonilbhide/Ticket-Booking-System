@@ -3,33 +3,7 @@
 <% if current_user %>
   <h1>Welcome, <%= current_user.name %>!</h1>
 
-  <h2>Available Trains</h2>
-  <table>
-    <thead>
-    <tr>
-      <th>Train Number</th>
-      <th>Departure Station</th>
-      <th>Termination Station</th>
-      <th>Departure Date</th>
-      <th>Departure Time</th>
-      <th>Arrival Date</th>
-      <th>Arrival Time</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @trains.each do |train| %>
-      <tr>
-        <td><%= train.train_number %></td>
-        <td><%= train.departure_station %></td>
-        <td><%= train.termination_station %></td>
-        <td><%= train.departure_date %></td>
-        <td><%= train.departure_time %></td>
-        <td><%= train.arrival_date %></td>
-        <td><%= train.arrival_time %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+  <%= link_to 'Edit Profile', edit_passenger_path(current_user) %><br>
 
   <%= link_to 'Logout', logout_path %><br>
 <% else %>
