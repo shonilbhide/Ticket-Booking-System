@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resources :trains do
     resources :reviews
   end
-  resources :admins
+  resources :admins 
+  get 'display', to: "admins#display", as: 'display_admin'
   resources :products
   resources :credit_cards
   resources :transactions
