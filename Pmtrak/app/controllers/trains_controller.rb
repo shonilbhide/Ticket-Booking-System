@@ -22,7 +22,7 @@ class TrainsController < ApplicationController
   # POST /trains or /trains.json
   def create
     @train = Train.new(train_params)
-
+    @train.seats_left = @train.train_capacity
     respond_to do |format|
       if @train.save
         format.html { redirect_to train_url(@train), notice: "Train was successfully created." }

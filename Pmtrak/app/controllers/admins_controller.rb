@@ -4,15 +4,17 @@ class AdminsController < ApplicationController
   # GET /admins or /admins.json
   def index
     @admin = Admin.first
+  end
+
+  # GET /admins/1 or /admins/1.json
+  def show
+    @admin = Admin.first
     @passengers = Passenger.all
     # if params[:search]
     #   @trains = Train.where("column_name LIKE ?", "%#{params[:search]}%")
     # else
     @trains = Train.all.order([:departure_station, termination_station: :desc])
-  end
 
-  # GET /admins/1 or /admins/1.json
-  def show
   end
 
   # GET /admins/new
@@ -65,7 +67,7 @@ class AdminsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin
-      @admin = Admin.find(params[:id])
+      @admin = Admin.first
     end
 
     # Only allow a list of trusted parameters through.

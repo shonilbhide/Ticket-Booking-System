@@ -4,6 +4,7 @@ class PassengersController < ApplicationController
   # GET /passengers or /passengers.json
   def index
     @passengers = Passenger.all
+    @trains = Train.all
   end
 
   def my_trips
