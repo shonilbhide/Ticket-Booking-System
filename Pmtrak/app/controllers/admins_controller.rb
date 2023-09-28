@@ -17,6 +17,10 @@ class AdminsController < ApplicationController
 
   end
 
+  def display
+    @admin = Admin.first
+  end
+
   # GET /admins/new
   def new
     @admin = Admin.new

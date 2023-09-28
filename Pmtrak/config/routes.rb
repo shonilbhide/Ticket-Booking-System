@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     resources :reviews
     get 'train_reviews', on: :member
   end
-  resources :admins
+  resources :admins 
+  get 'display', to: "admins#display", as: 'display_admin'
   resources :products
   resources :credit_cards
   resources :transactions
