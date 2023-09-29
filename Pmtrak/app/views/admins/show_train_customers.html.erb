@@ -1,0 +1,33 @@
+<h2>Enter Train Number</h2>
+<%= form_with url: show_train_customers_admin_path(@admin), method: :get, local: true do %>
+  <%= text_field_tag :search_train_customers %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if params[:search_train_customers].present? %>
+    <>
+    <table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone number</th>
+      <th>Address</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @train_passengers.each do |passenger| %>
+      <tr>
+        <td><%= passenger.name %></td>
+        <td><%= passenger.email %></td>
+        <td><%= passenger.phone_number %></td>
+        <td><%= passenger.address %></td>
+        <td><%= link_to 'Edit', edit_passenger_path(passenger) %></td>
+        <td><%= link_to 'Destroy', passenger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get 'show_trains', on: :member
     get 'show_tickets', on: :member
     get 'show_reviews', on: :member
+    get 'show_train_customers', on: :member
   end
   get 'display', to: "admins#display", as: 'display_admin'
   resources :products
