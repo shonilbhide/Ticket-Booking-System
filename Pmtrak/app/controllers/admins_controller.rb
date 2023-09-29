@@ -105,7 +105,12 @@ class AdminsController < ApplicationController
     end
   end
 
-
+  def show_train_customers
+    @admin = set_admin
+    if params[:search_train_customers].present?
+      train.find_by(train_number: params[:search_train_customers])
+      @train_passengers = train.passengers
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
