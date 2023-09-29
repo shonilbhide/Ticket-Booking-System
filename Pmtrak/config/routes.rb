@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :passengers do
     get 'my_trips', on: :member
     get 'user_reviews', on: :member
+    get 'show_trains', on: :member
+    get 'show_reviews', on: :member
   end
   resources :reviews
   resources :trains do

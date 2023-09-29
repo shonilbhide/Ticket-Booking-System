@@ -74,33 +74,34 @@ class PassengersController < ApplicationController
   #   @reviews_for_trains = @booked_trains.map { |train| {train: train, reviews: train.reviews} }
   # end
   def show
-    @booked_trains = @passenger.tickets.includes(:train).map(&:train)
     @trains = Train.all
+  end
+
+  def show_trains
+    @passenger = set_passenger
+
+    if params[:search_by_departure].present?
+      @trains = Train.where(departure_station: params[:search_by_departure])
+      puts @trains
+    elsif params[:search_by_arrival].present?
+      @trains = Train.where(termination_station: params[:search_by_arrival])
+    else
+      @trains = Train.where('departure_date > ?', DateTime.now)
+    end
+  end
+
+  def show_reviews
+    @passenger = set_passenger
+    @booked_trains = @passenger.tickets.includes(:train).map(&:train)
 
     if params[:search_by_user_name].present?
       user = Passenger.find_by(name: params[:search_by_user_name])
-      @reviews_by_user = user&.reviews || []
-    else
-      @reviews_by_user = @passenger.reviews
-    end
-
-    if params[:search_by_train_number].present?
+      @reviews = user&.reviews || []
+    elsif params[:search_by_train_number].present?
       train = Train.find_by(train_number: params[:search_by_train_number])
-      @reviews_for_trains = [{train: train, reviews: train&.reviews || []}]
+      @reviews = train&.reviews || []
     else
-      @reviews_for_trains = @booked_trains.map { |train| {train: train, reviews: train.reviews} }
-    end
-
-    if params[:search_by_departure].present?
-      @trains_by_departure = Train.where(departure_station: params[:search_by_departure])
-    else
-      @trains_by_departure = @booked_trains
-    end
-
-    if params[:search_by_arrival].present?
-      @trains_by_arrival = Train.where(termination_station: params[:search_by_arrival])
-    else
-      @trains_by_arrival = @booked_trains
+      @reviews = @booked_trains.map { |train| {train: train, reviews: train.reviews} }
     end
   end
 
