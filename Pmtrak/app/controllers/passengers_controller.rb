@@ -105,6 +105,10 @@ class PassengersController < ApplicationController
     end
   end
 
+  def display
+    @passenger = set_passenger
+  end
+
   def login
     
   end

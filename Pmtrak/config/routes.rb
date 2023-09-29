@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'user_reviews', on: :member
     get 'show_trains', on: :member
     get 'show_reviews', on: :member
+    get 'display', on: :member
   end
   resources :reviews
   resources :trains do
