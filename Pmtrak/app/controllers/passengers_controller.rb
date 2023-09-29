@@ -93,7 +93,7 @@ class PassengersController < ApplicationController
   def show_reviews
     @passenger = set_passenger
     @booked_trains = @passenger.tickets.includes(:train).map(&:train)
-
+    @my_reviews = @passenger.reviews
     if params[:search_by_user_name].present?
       user = Passenger.find_by(name: params[:search_by_user_name])
       @reviews = user&.reviews || []
@@ -101,7 +101,7 @@ class PassengersController < ApplicationController
       train = Train.find_by(train_number: params[:search_by_train_number])
       @reviews = train&.reviews || []
     else
-      @reviews = @booked_trains.map { |train| {train: train, reviews: train.reviews} }
+      @reviews = @my_reviews
     end
   end
 
