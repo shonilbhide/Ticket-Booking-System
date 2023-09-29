@@ -108,8 +108,9 @@ class AdminsController < ApplicationController
   def show_train_customers
     @admin = set_admin
     if params[:search_train_customers].present?
-      train.find_by(train_number: params[:search_train_customers])
-      @train_passengers = train.passengers
+      train = Train.find_by(train_number: params[:search_train_customers])
+      @train_passengers = train.tickets.map {|ticket| ticket.passenger}
+    end
   end
 
   private

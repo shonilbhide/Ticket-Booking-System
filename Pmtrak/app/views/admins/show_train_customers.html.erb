@@ -5,7 +5,6 @@
 <% end %>
 
 <% if params[:search_train_customers].present? %>
-    <>
     <table>
   <thead>
     <tr>
@@ -13,7 +12,6 @@
       <th>Email</th>
       <th>Phone number</th>
       <th>Address</th>
-      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -24,10 +22,10 @@
         <td><%= passenger.email %></td>
         <td><%= passenger.phone_number %></td>
         <td><%= passenger.address %></td>
-        <td><%= link_to 'Edit', edit_passenger_path(passenger) %></td>
-        <td><%= link_to 'Destroy', passenger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <% end %>
+
+<%= link_to 'Back', admin_path(@admin) %>
