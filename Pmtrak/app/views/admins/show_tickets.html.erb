@@ -1,27 +1,25 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Tickets</h1>
+<h1>All Tickets</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Confirmation number</th>
-      <th colspan="3"></th>
+      <th>Ticket ID</th>
+      <th>Passenger</th>
+      <th>Train</th>
+      <!-- Add more ticket attributes as needed -->
     </tr>
   </thead>
-
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr>
-        <td><%= ticket.confirmation_number %></td>
-        <td><%= link_to 'Show', ticket %></td>
-        <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-        <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= ticket.id %></td>
+        <td><%= ticket.passenger.name %></td>
+        <td><%= ticket.train.train_number %></td>
+        <!-- Add more ticket details here -->
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
 <%= link_to 'Back', admin_path(@admin) %>

@@ -89,7 +89,7 @@ class AdminsController < ApplicationController
 
   def show_tickets
     @admin = set_admin
-    @tickets = Ticket.all
+    @tickets = Ticket.all.includes(:passenger, :train).order(:train)
   end
 
   def show_reviews

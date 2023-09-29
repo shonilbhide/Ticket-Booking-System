@@ -2,7 +2,7 @@
 
 <%= render 'form', passenger: @passenger %>
 
-<% if logged_in? %>
+<% if logged_in? && is_admin?%>
   <%= link_to "Back", show_passengers_admin_path(@admin) %>
 <% else %>
   <%= link_to "Login", root_path %>
