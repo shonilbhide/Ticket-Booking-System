@@ -86,7 +86,7 @@ class PassengersController < ApplicationController
     elsif params[:search_by_arrival].present?
       @trains = Train.where(termination_station: params[:search_by_arrival])
     else
-      @trains = Train.where('departure_date > ?', DateTime.now)
+      @trains = Train.where('departure_date > ? AND seats_left>0', DateTime.now)
     end
   end
 
