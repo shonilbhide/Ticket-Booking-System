@@ -96,17 +96,19 @@ class PassengersController < ApplicationController
 
     if params[:search_by_rating].present?
       min_rating = params[:search_by_rating].to_f
-      @trains = Train.joins(:reviews)
-                     .group("trains.id")
-                     .having("AVG(reviews.rating) >= ?", min_rating)
+      @trains = Train.where('seats_left>0 AND departure_date > ?', DateTime.now)
+                      .joins(:reviews)
+                      .group("trains.id")
+                      .having("AVG(reviews.rating) >= ?", min_rating)
     else
+      query_string = 'seats_left>0 AND departure_date > ' + DateTime.now
       if params[:search_by_departure].present?
-        @trains = Train.where(departure_station: params[:search_by_departure])
+        @trains = Train.where(query_string + 'AND departure_station = ?', params[:search_by_departure])
         puts @trains
       elsif params[:search_by_arrival].present?
-        @trains = Train.where(termination_station: params[:search_by_arrival])
+        @trains = Train.where(query_string + 'AND termination_station = ?', params[:search_by_arrival])
       else
-        @trains = Train.where('departure_date > ? AND seats_left>0', DateTime.now)
+        @trains = Train.where(query_string)
       end
     end
   end
