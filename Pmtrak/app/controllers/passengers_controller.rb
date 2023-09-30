@@ -55,9 +55,15 @@ class PassengersController < ApplicationController
   def update
     respond_to do |format|
       if @passenger.update(passenger_params)
+        if session[:admin_id]
+          @admin = Admin.first
+          format.html { redirect_to show_passengers_admin_path(@admin), notice: "Passenger was successfully updated." }
+        else
         format.html { redirect_to passenger_url(@passenger), notice: "Passenger was successfully updated." }
         format.json { render :show, status: :ok, location: @passenger }
+        end
       else
+        @admin = Admin.first
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @passenger.errors, status: :unprocessable_entity }
       end

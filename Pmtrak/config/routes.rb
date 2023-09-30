@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :tickets, only: [:destroy] do
+  resources :tickets, only: [:destroy, :edit, :update] do
     post 'book', on: :collection
   end
   resources :passengers do

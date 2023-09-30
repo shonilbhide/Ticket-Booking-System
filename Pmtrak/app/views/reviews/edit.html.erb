@@ -2,7 +2,7 @@
 
 <%= render 'form', review: @review %>
 
-<%= link_to 'Show', @review %> |
+|
 <% if logged_in? && is_admin?%>
   <%= link_to "Back", show_reviews_admin_path(@current_user) %>
 <% else %>

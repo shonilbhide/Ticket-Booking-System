@@ -44,8 +44,13 @@ class ReviewsController < ApplicationController
     @passenger = @review.passenger
     respond_to do |format|
       if @review.update(review_params)
+        if session[:admin_id]
+          @admin = Admin.first
+          format.html { redirect_to show_reviews_admin_path(@admin), notice: "Passenger was successfully updated." }
+        else
         format.html { redirect_to my_trips_passenger_path(@passenger), notice: "Review was successfully updated." }
         format.json { render :show, status: :ok, location: @review }
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @review.errors, status: :unprocessable_entity }
