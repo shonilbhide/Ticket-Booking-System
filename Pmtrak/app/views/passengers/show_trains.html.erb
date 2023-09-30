@@ -15,6 +15,12 @@
   <%= submit_tag "Search" %>
 <% end %>
 <br>
+<h4>Search Trains by Average Rating:</h4>
+<%= form_with url: show_trains_passenger_path(@passenger), method: :get, local: true do %>
+  <%= number_field_tag :search_by_rating, nil, step: 0.1 %>
+  <%= submit_tag "Search" %>
+<% end %>
+<br>
 
 <% if params[:search_by_arrival].present? %>
   <h3>Trains by Arrival <%= params[:search_by_arrival] %></h3>
@@ -43,6 +49,7 @@
         <th>Arrival Time</th>
         <th>Ticket Price</th>
         <th>Seats Left</th>
+        <th>Average Rating</th>
     </tr>
     </thead>
     <tbody>
@@ -57,6 +64,7 @@
         <td><%= train.arrival_time.strftime("%H:%M:%S %Z") %></td>
         <td><%= train.ticket_price %></td>
         <td><%= train.seats_left %></td>
+        <td><%= train.average_rating %></td>
         <% if train.seats_left > 0 %>
             <td><%= link_to 'Book', book_tickets_path(train_id: train.id), method: :post %></td>
         <% end %>
