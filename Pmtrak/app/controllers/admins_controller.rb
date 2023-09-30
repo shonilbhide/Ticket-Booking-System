@@ -90,14 +90,14 @@ class AdminsController < ApplicationController
 
   def show_reviews
     @admin = set_admin
-    @reviews = Review.all
     if params[:search_by_user_name].present?
       user = Passenger.find_by(name: params[:search_by_user_name])
       @reviews = user&.reviews || []
-    end
-    if params[:search_by_train_number].present?
+    elsif params[:search_by_train_number].present?
       train = Train.find_by(train_number: params[:search_by_train_number])
-      @reviews = [{train: train, reviews: train&.reviews || []}]
+      @reviews = train&.reviews || []
+    else
+      @reviews = Review.all
     end
   end
 

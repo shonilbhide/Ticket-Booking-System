@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+<h1>Train details: </h1>
+<p>
+  <strong>Train number:</strong>
+  <%= @train.train_number %>
+</p>
+
+<p>
+  <strong>Departure station:</strong>
+  <%= @train.departure_station %>
+</p>
+
+<p>
+  <strong>Termination station:</strong>
+  <%= @train.termination_station %>
+</p>
+
+<p>
+  <strong>Departure date:</strong>
+  <%= @train.departure_date %>
+</p>
+
+<p>
+  <strong>Departure time:</strong>
+  <%= @train.departure_time %>
+</p>
+
+<p>
+  <strong>Arrival date:</strong>
+  <%= @train.arrival_date %>
+</p>
+
+<p>
+  <strong>Arrival time:</strong>
+  <%= @train.arrival_time %>
+</p>
+
+<p>
+  <strong>Ticket price:</strong>
+  <%= @train.ticket_price %>
+</p>
+
+<p>
+  <strong>Train capacity:</strong>
+  <%= @train.train_capacity %>
+</p>
+
+<p>
+  <strong>Seats left:</strong>
+  <%= @train.seats_left %>
+</p>
+<br><br>
+<%= link_to 'Book Ticket for yourself', book_now_tickets_path(train_id: @train.id), method: :post %>
+<br><br>
+<%= form_with url: book_now_tickets_path(train_id: @train.id), method: :post, local: true do %>
+  <%= text_field_tag :Add_passenger %>
+  <%= submit_tag "Book for another passenger" %>
+<% end %>
+<br><br>
+<%= link_to 'Back', passenger_path(current_user) %>

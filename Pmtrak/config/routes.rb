@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :tickets, only: [:destroy, :edit, :update] do
-    post 'book', on: :collection
+    post 'book_now', on: :collection
+    get 'book', on: :member
   end
   resources :passengers do
     get 'my_trips', on: :member
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
     resources :reviews
     get 'train_reviews', on: :member
   end
-  resources :tickets, only: [:edit]
+  
   resources :admins, except: :index do
     get 'show_passengers', on: :member
     get 'show_trains', on: :member

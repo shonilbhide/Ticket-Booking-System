@@ -66,19 +66,34 @@ class TicketsController < ApplicationController
   end
 
   def book
-    # Assuming you have set up @train and current_user
+    @train = set_train
     existing_ticket = Ticket.find_by(passenger: current_user, train: @train)
+  end
 
-    if existing_ticket
-      # Redirect with a message saying the user has already booked this train
-      redirect_to passenger_path(current_user), alert: 'You have already booked this train!'
-    elsif @train.seats_left > 0
-      Ticket.create(passenger: current_user, train: @train)
-      @train.update(seats_left: @train.seats_left - 1)
-      redirect_to passenger_path(current_user), notice: 'Train booked successfully!'
+  def book_now
+    @train = set_train
+   
+    if params[:Add_passenger].present?
+      current_passenger = Passenger.find_by_email(params[:Add_passenger])
     else
-      # Redirect with a message saying no seats are left
-      redirect_to some_path, alert: 'No seats left on this train!'
+      current_passenger = current_user
+    end
+    # Assuming you have set up @train and current_user
+    existing_ticket = Ticket.find_by(passenger: current_passenger, train: @train)
+    if current_passenger
+      if existing_ticket
+        # Redirect with a message saying the user has already booked this train
+        redirect_to passenger_path(current_user), notice: 'You have already booked this train!'
+      elsif @train.seats_left > 0
+        Ticket.create(passenger: current_passenger,train: @train,creator_id: current_user.id )
+        @train.update(seats_left: @train.seats_left - 1)
+        redirect_to passenger_path(current_passenger), notice: 'Train booked successfully!'
+      else
+        # Redirect with a message saying no seats are left
+        redirect_to show_trains_passenger_path(current_user), notice: 'No seats left on this train!'
+      end
+    else
+      redirect_to show_trains_passenger_path(current_user), notice: 'Passenger does not exist!'
     end
   end
 

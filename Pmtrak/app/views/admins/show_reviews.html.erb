@@ -1,25 +1,47 @@
-<h1>Reviews</h1>
+<%= form_with url: show_reviews_admin_path(@admin), method: :get, local: true do %>
+  <%= submit_tag "Refresh" %>
+<% end %>
+<h2>Search Reviews by User</h2>
+<%= form_with url: show_reviews_admin_path(@admin), method: :get, local: true do %>
+  <%= text_field_tag :search_by_user_name %>
+  <%= submit_tag "Search" %>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Rating</th>
-      <th>Feedback</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+<h2>Search Reviews by Train Number</h2>
+<%= form_with url: show_reviews_admin_path(@admin), method: :get, local: true do %>
+  <%= text_field_tag :search_by_train_number %>
+  <%= submit_tag "Search" %>
+<% end %>
 
-  <tbody>
-    <% @reviews.each do |review| %>
-      <tr>
-        <td><%= review.rating %></td>
-        <td><%= review.feedback %></td>
-        <td><%= link_to 'Edit', edit_review_path(review) %></td>
-        <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+
+<% if params[:search_by_user_name].present? %>
+    <h3>Reviews by <%= params[:search_by_user_name] %></h3>
+    <% if !@reviews.any? %>
+        <p>No reviews found.</p>
     <% end %>
-  </tbody>
-</table>
+<% end %>
+
+<% if params[:search_by_train_number].present? %>
+  <h4>Reviews for Train Number <%= params[:search_by_train_number] %></h4>
+  <% if !@reviews.any? %>
+        <p>No reviews found.</p>
+    <% end %>
+<% end %>
+
+<% if @reviews.any?%>
+    <ul>
+        <% @reviews.each do |review| %>
+        <li>
+            Review Given by: <%= review.passenger.name %> |
+            Train Number: <%= review.train.train_number %> |
+            Review: <%= review.feedback %> |
+            Rating: <%= review.rating %>/5
+        </li>
+        <% end %>
+    </ul>
+<% end %>
+
 
 <br>
 <br>

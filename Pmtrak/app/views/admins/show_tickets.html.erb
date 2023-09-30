@@ -5,6 +5,7 @@
     <tr>
       <th>Ticket ID</th>
       <th>confirmation_number</th>
+      <th>Buyer name</th>
       <th>Passenger name</th>
       <th>Passenger email</th>
       <th>Train ID</th>
@@ -24,6 +25,7 @@
       <tr>
         <td><%= ticket.id %></td>
         <td><%= ticket.confirmation_number %></td>
+        <td><%= Passenger.find_by_id(ticket.creator_id).name %></td>
         <td><%= ticket.passenger.name %></td>
         <td><%= ticket.passenger.email %></td>
         <td><%= ticket.train.train_number %></td>

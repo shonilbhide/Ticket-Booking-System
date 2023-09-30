@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p><br>
 <h2>Available Trains</h2>
 <br>
 <%= form_with url: show_trains_passenger_path(@passenger), method: :get, local: true do %>
@@ -66,7 +67,7 @@
         <td><%= train.seats_left %></td>
         <td><%= train.average_rating %></td>
         <% if train.seats_left > 0 %>
-            <td><%= link_to 'Book', book_tickets_path(train_id: train.id), method: :post %></td>
+            <td><%= link_to 'Book Train', book_ticket_path(train_id: train.id), method: :get %></td>
         <% end %>
         </tr>
     <% end %>
