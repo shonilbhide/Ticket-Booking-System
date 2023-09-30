@@ -1,4 +1,5 @@
 <h4>Available Passengers</h4>
+<br>
 <table>
   <thead>
     <tr>
@@ -23,7 +24,9 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to 'Add New Passengers', new_passenger_path(@admin) %>
+<br>
+<br>
+<%= link_to 'Add New Passengers', new_passenger_path %>
+<br>
 <br>
 <%= link_to 'Back', admin_path(current_user) %>

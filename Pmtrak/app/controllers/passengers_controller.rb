@@ -35,12 +35,19 @@ class PassengersController < ApplicationController
 
     respond_to do |format|
       if @passenger.save
-        format.html { redirect_to passenger_url(@passenger), notice: "Passenger was successfully created." }
-        format.json { render :show, status: :created, location: @passenger }
+        if session[:admin_id]
+            @admin = Admin.first
+            format.html { redirect_to show_passengers_admin_path(@admin), notice: "Passenger was successfully created." }
+          else
+          format.html { redirect_to passenger_url(@passenger), notice: "Passenger was successfully created." }
+          format.json { render :show, status: :created, location: @passenger }
+        end
       else
+        @admin = Admin.first
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @passenger.errors, status: :unprocessable_entity }
       end
+
     end
   end
 
@@ -61,18 +68,18 @@ class PassengersController < ApplicationController
   def destroy
     @passenger.destroy
     session[:passenger_id] = nil
-    respond_to do |format|
-      format.html { redirect_to root_url, notice: "Passenger was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    if is_admin?
+      respond_to do |format|
+        format.html { redirect_to show_passengers_admin_url(@current_user), notice: "Passenger was successfully destroyed." }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to root_url, notice: "Passenger was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    end 
   end
 
-  # def show
-  #   @booked_trains = @passenger.tickets.includes(:train).map(&:train)
-  #   @trains = Train.all
-  #   @reviews_by_user = Review.where(passenger: @passenger)
-  #   @reviews_for_trains = @booked_trains.map { |train| {train: train, reviews: train.reviews} }
-  # end
   def show
     @trains = Train.all
   end

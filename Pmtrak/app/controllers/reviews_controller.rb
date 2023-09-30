@@ -57,11 +57,16 @@ class ReviewsController < ApplicationController
   def destroy
     @passenger = current_user
     @review.destroy
-
+    if is_admin?
+      respond_to do |format|
+        format.html { redirect_to show_tickets_admin_url(@current_user), notice: "Review was successfully destroyed." }
+      end
+    else
     respond_to do |format|
       format.html { redirect_to my_trips_passenger_path(@passenger), notice: "Review was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
   end
 
   private

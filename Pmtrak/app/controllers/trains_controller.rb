@@ -55,9 +55,9 @@ class TrainsController < ApplicationController
   # DELETE /trains/1 or /trains/1.json
   def destroy
     @train.destroy
-
+    
     respond_to do |format|
-      format.html { redirect_to trains_url, notice: "Train was successfully destroyed." }
+      format.html { redirect_to show_trains_admin_path(@current_user), notice: "Train was successfully destroyed." }
       format.json { head :no_content }
     end
   end

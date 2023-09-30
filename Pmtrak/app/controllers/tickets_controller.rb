@@ -53,10 +53,16 @@ class TicketsController < ApplicationController
     @train = @ticket.train
     @ticket.destroy
     @train.update(seats_left: @train.seats_left + 1)
+    if is_admin?
+      respond_to do |format|
+        format.html { redirect_to show_tickets_admin_url(@current_user), notice: "Review was successfully destroyed." }
+      end
+    else
     respond_to do |format|
       format.html { redirect_to my_trips_passenger_path(current_user), notice: "Ticket was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
   end
 
   def book
