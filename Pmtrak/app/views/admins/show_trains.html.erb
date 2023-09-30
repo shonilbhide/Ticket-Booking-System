@@ -29,6 +29,7 @@
       <th>Ticket price</th>
       <th>Train capacity</th>
       <th>Seats left</th>
+      <th>Average Rating</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -46,6 +47,7 @@
         <td><%= train.ticket_price %></td>
         <td><%= train.train_capacity %></td>
         <td><%= train.seats_left %></td>
+        <td><%= train.average_rating %></td>
         <td><%= link_to 'Edit', edit_train_path(train) %></td>
         <td><%= link_to 'Destroy', train, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
