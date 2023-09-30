@@ -101,7 +101,7 @@ class PassengersController < ApplicationController
                       .group("trains.id")
                       .having("AVG(reviews.rating) >= ?", min_rating)
     else
-      query_string = 'seats_left>0 AND departure_date > ' + DateTime.now
+      query_string = 'seats_left>0 AND departure_date > ?',DateTime.now
       if params[:search_by_departure].present?
         @trains = Train.where(query_string + 'AND departure_station = ?', params[:search_by_departure])
         puts @trains
