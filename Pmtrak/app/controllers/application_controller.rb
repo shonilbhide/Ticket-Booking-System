@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
     before_action :authorized
     helper_method :logged_in?
     helper_method :is_admin?
+    helper_method :authorized_admin
+    helper_method :is_passenger?
+    helper_method :authorized_passenger
 
 
     def current_user
@@ -26,15 +29,27 @@ class ApplicationController < ActionController::Base
     end
 
     def is_admin?
-      if @current_user.class == Admin
-        return true
-      else
-        return false
-      end
+      @current_user.class == Admin
+    end
+
+    def is_passenger?
+      @current_user.class == Passenger
     end
    
     def authorized
       redirect_to root_path unless logged_in?
+    end
+
+    def authorized_admin
+      if !logged_in? || !is_admin?
+        redirect_to logout_path, alert: "Invalid Action"
+      end
+    end
+
+    def authorized_passenger
+      if !logged_in? || !is_passenger?
+        redirect_to logout_path, alert: "Invalid Action"
+      end
     end
    
   end

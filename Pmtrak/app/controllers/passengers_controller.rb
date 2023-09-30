@@ -1,6 +1,7 @@
 class PassengersController < ApplicationController
   before_action :set_passenger, only: %i[ show edit update destroy ]
   skip_before_action :authorized, only: [:new, :create]
+  before_action :authorized_passenger, except: [:new, :create, :edit, :update, :destroy]
   # GET /passengers or /passengers.json
   def index
     @passengers = Passenger.all
