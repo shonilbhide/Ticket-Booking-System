@@ -46,6 +46,8 @@ class ApplicationController < ActionController::Base
       end
     end
 
+
+
     def authorized_passenger
       if !logged_in? || !is_passenger?
         redirect_to logout_path, alert: "Invalid Action"
