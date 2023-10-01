@@ -3,16 +3,16 @@ Rails.application.routes.draw do
     post 'book_now', on: :collection
     get 'book', on: :member
   end
-  resources :passengers do
+  resources :passengers, except: [:index] do
     get 'my_trips', on: :member
     get 'user_reviews', on: :member
     get 'show_trains', on: :member
     get 'show_reviews', on: :member
     get 'display', on: :member
   end
-  resources :reviews
-  resources :trains do
-    resources :reviews
+  resources :reviews, except: [:index, :show]
+  resources :trains, except: [:index, :show] do
+  resources :reviews, except: [:index, :show]
     get 'train_reviews', on: :member
   end
   
@@ -24,9 +24,6 @@ Rails.application.routes.draw do
     get 'show_train_customers', on: :member
   end
   get 'display', to: "admins#display", as: 'display_admin'
-  resources :products
-  resources :credit_cards
-  resources :transactions
   root 'home#index'
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: "passengers#new", as: 'signup'
