@@ -35,7 +35,7 @@
         <%= form_with(model: [train, Review.new], local: true) do |form| %>
           <%= form.hidden_field :passenger_id, value: current_user.id %>
           <%= form.label :rating %>
-          <%= form.number_field :rating, in: 1..5 %>
+          <%= form.number_field :rating, in: 0..5, value: 0 %>
           <%= form.label :feedback %>
           <%= form.text_area :feedback %>
           <%= form.submit 'Submit Review' %>
