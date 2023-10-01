@@ -34,7 +34,7 @@ To set up locally:
 3. **View details**
    - After logging in, click on the Show and Edit User Details link
 
-4. **View details**
+4. **Edit details**
    - After logging in, click on on Show and Edit User Details link
    - Click on the Edit link
    - Update the details and click on update passenger button
@@ -88,43 +88,90 @@ To set up locally:
 
 
 ### How-to for Admins
-1. **Edit Your Profile**
-   - Choose 'Edit Profile' on the Home page to change any information about your account.
-   - Change Name, Email, Address, and Phone number.
+1. 2. **Login**
+   - Click on login link
+   - enter the admin email
+   - enter your password
+   - click on login button
 
-2. **Manage All Trains**
-   - Click 'View all Trains' on the Home page.
-   - **Add a Train**
-     - Click 'New Train' at the bottom of the page.
-   - **Edit or Delete a Train**
-     - Click 'Show this train' for the train you would like to delete.
-     - Click 'Destroy this train' to delete the train.
-     - Click 'Edit this train' to edit information about the train.
+3. **View details**
+   - After logging in, click on the Show and Edit Admin Details link
 
-3. **Manage All Reviews**
-   - Click 'View all Reviews' on the Home page.
-   - **Add a Review**
-     - Click 'New Train' at the bottom of the page.
-   - **Edit or Delete a Review**
-     - Click 'Show this review' for the review you would like to delete.
-     - Click 'Destroy this review' to delete the review.
-     - Click 'Edit this review' to edit information about the review.
+4. **Edit details**
+   - After logging in, click on on Show and Edit Admin Details link
+   - Click on the Edit link
+   - Update the details and click on update passenger button
 
-4. **Manage All Tickets**
-   - **Book a Ticket**
-     - Click 'View all Trains' on the home page.
-     - Click 'Book a ticket' for the train you would like to book.
-   - Click 'View all Tickets' on the Home page.
-   - **Edit or Delete a Ticket**
-     - Click 'Show this ticket' for the ticket you would like to delete.
-     - Click 'Destroy this ticket' to delete the ticket.
-     - Click 'Edit this ticket' to edit information about the ticket.
+5. **Create new train**
+    - Click on 'View all Trains'
+    - Click on 'Add New Trains'
+    - Add all the train details and then click on 'Create Train' button to create the train
 
-5. **Manage All Passengers**
-   - Click 'View all Reviews' on the Home page.
-   - **Add a Passenger**
-     - Click 'New Passenger' at the bottom of the page.
-   - **Edit or Delete a Passenger**
-     - Click 'Show' for the Passenger you would like to delete.
-     - Click 'Destroy' to Cancel the Passenger's account.
-     - Click 'Edit' to edit information about the Passenger.
+6. **View train**
+    - Click on 'View all Trains'
+    - To filter by either Destination or Termination Station or both, add in the appropriate fields and then click on search
+    - The table will be populated with filtered trains 
+
+7. **Edit a Train**
+    - Click on 'View all Trains'
+    - Click on 'edit' link besides the train which you want to edit
+    - Change the fields which you want to edit
+    - Click on update train
+
+8. **Delete a Train**
+    - Click on 'View all Trains'
+    - Click on 'destroy' link besides the train which you want to edit
+
+9. **Create new passenger**
+    - Click on 'View all passengers'
+    - Click on 'Add New passengers'
+    - Add all the passenger details and then click on 'Create passenger' button to create the passenger
+
+10. **View passenger**
+    - Click on 'View all passengers'
+    - The table will be populated with all passengers 
+
+11. **Edit a passenger**
+    - Click on 'View all passengers'
+    - Click on 'edit' link besides the passenger which you want to edit
+    - Change the fields which you want to edit
+    - Click on update passenger
+
+12. **Delete a passenger**
+    - Click on 'View all passengers'
+    - Click on 'destroy' link besides the passenger which you want to edit
+
+
+13. **View ticket**
+    - Click on 'View all tickets'
+    - The table will be populated with filtered tickets 
+
+14. **Edit a ticket**
+    - Click on 'View all tickets'
+    - Click on 'edit' link besides the ticket which you want to edit
+    - Change the field value
+    - Click on update ticket
+
+15. **Delete a ticket**
+    - Click on 'View all tickets'
+    - Click on 'destroy' link besides the ticket which you want to edit
+
+16. **View review**
+    - Click on 'View all reviews'
+    - The table will be populated with filtered reviews 
+
+17. **Edit a review**
+    - Click on 'View all reviews'
+    - Click on 'edit' link besides the review which you want to edit
+    - Change the field value
+    - Click on update review
+
+18. **Delete a review**
+    - Click on 'View all reviews'
+    - Click on 'destroy' link besides the review which you want to edit
+
+19. **Search Passengers for a particular train**
+    - Click on Show users by train
+    - Enter the train number
+    - The passenger list will be populated
+   
