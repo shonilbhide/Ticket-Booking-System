@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get 'show_trains', on: :member
     get 'show_reviews', on: :member
     get 'display', on: :member
+    get 'show_booked_tickets', on: :member
   end
   resources :reviews
   resources :trains do

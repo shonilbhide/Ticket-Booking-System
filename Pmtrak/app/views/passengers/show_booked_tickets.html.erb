@@ -1,0 +1,87 @@
+<h1>My Tickets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket ID</th>
+      <th>confirmation_number</th>
+      <th>Buyer name</th>
+      <th>Passenger name</th>
+      <th>Passenger email</th>
+      <th>Train ID</th>
+      <th>Departure station</th>
+      <th>Departure date</th>
+      <th>Departure time</th>
+      <th>Termination station</th>
+      <th>Arrival date</th>
+      <th>Arival time</th>
+      <th>Price</th>
+      <!-- Add more ticket attributes as needed -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @my_tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.id %></td>
+        <td><%= ticket.confirmation_number %></td>
+        <td><%= Passenger.find_by_id(ticket.creator_id).name %></td>
+        <td><%= ticket.passenger.name %></td>
+        <td><%= ticket.passenger.email %></td>
+        <td><%= ticket.train.train_number %></td>
+        <td><%= ticket.train.departure_station %></td>
+        <td><%= ticket.train.departure_date %></td>
+        <td><%= ticket.train.departure_time %></td>
+        <td><%= ticket.train.termination_station %></td>
+        <td><%= ticket.train.arrival_date %></td>
+        <td><%= ticket.train.arrival_time %></td>
+        <td><%= ticket.train.ticket_price %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<h1>Tickets Bought for others</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket ID</th>
+      <th>confirmation_number</th>
+      <th>Buyer name</th>
+      <th>Passenger name</th>
+      <th>Passenger email</th>
+      <th>Train ID</th>
+      <th>Departure station</th>
+      <th>Departure date</th>
+      <th>Departure time</th>
+      <th>Termination station</th>
+      <th>Arrival date</th>
+      <th>Arival time</th>
+      <th>Price</th>
+      <!-- Add more ticket attributes as needed -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @other_tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.id %></td>
+        <td><%= ticket.confirmation_number %></td>
+        <td><%= Passenger.find_by_id(ticket.creator_id).name %></td>
+        <td><%= ticket.passenger.name %></td>
+        <td><%= ticket.passenger.email %></td>
+        <td><%= ticket.train.train_number %></td>
+        <td><%= ticket.train.departure_station %></td>
+        <td><%= ticket.train.departure_date %></td>
+        <td><%= ticket.train.departure_time %></td>
+        <td><%= ticket.train.termination_station %></td>
+        <td><%= ticket.train.arrival_date %></td>
+        <td><%= ticket.train.arrival_time %></td>
+        <td><%= ticket.train.ticket_price %></td>
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', passenger_path(@current_user) %>
