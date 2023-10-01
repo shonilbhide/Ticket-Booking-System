@@ -46,7 +46,7 @@ class ReviewsController < ApplicationController
       if @review.update(review_params)
         if session[:admin_id]
           @admin = Admin.first
-          format.html { redirect_to show_reviews_admin_path(@admin), notice: "Passenger was successfully updated." }
+          format.html { redirect_to show_reviews_admin_path(@admin), notice: "Review was successfully updated." }
         else
         format.html { redirect_to my_trips_passenger_path(@passenger), notice: "Review was successfully updated." }
         format.json { render :show, status: :ok, location: @review }

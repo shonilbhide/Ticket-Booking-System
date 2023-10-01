@@ -134,6 +134,11 @@ class PassengersController < ApplicationController
     
   end
 
+  def show_booked_tickets
+    @my_tickets = Ticket.find_by(passenger_id: current_user.id)
+    @other_ticket = Ticket.find_by(creator_id: current_user.id).where.not(passenger_id: current_user.id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     # def set_passenger
