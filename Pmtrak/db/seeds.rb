@@ -9,4 +9,4 @@
 
 # Create admin
 Admin.destroy_all
-Admin.create(username: "admin",name:"admin", email: "admin@example.com", password: "Admin@pass123",phone_number: "999-999-9999",credit_number: "1234567890")
+Admin.create(username: "admin",name:"admin", email: "admin@example.com", password: "Admin@pass123",phone_number: "999-999-9999",credit_number: "1234-1234-1234-1234")

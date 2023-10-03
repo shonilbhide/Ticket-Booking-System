@@ -42,7 +42,11 @@ class ApplicationController < ActionController::Base
 
     def authorized_admin
       if !logged_in? || !is_admin?
-        redirect_to logout_path, alert: "Invalid Action"
+        if !is_passenger?
+          redirect_to passenger_path(@current_user), alert: "Invalid Action"
+        else
+          redirect_to logout_path, alert: "Invalid Action"
+        end
       end
     end
 
@@ -50,7 +54,11 @@ class ApplicationController < ActionController::Base
 
     def authorized_passenger
       if !logged_in? || !is_passenger?
-        redirect_to logout_path, alert: "Invalid Action"
+        if !is_admin?
+          redirect_to admin_path(@current_user), alert: "Invalid Action"
+        else
+          redirect_to logout_path, alert: "Invalid Action"
+        end
       end
     end
    

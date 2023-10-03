@@ -11,9 +11,6 @@ class AdminsController < ApplicationController
   # GET /admins/1 or /admins/1.json
   def show
     @admin = set_admin
-    # if params[:search]
-    #   @trains = Train.where("column_name LIKE ?", "%#{params[:search]}%")
-    # else
   end
 
   def display
