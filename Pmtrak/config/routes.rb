@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get 'show_booked_tickets', on: :member
   end
   resources :reviews, except: [:index, :show]
-  resources :trains, except: [:index, :show] do
+  resources :trains, except: [:index] do
   resources :reviews, except: [:index, :show]
     get 'train_reviews', on: :member
   end
