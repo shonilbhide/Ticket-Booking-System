@@ -9,7 +9,7 @@
 <%= form_with url: show_trains_passenger_path(@passenger), method: :get, local: true do %>
   <%= text_field_tag :search_by_departure, nil, placeholder: 'Enter Departure Station'%>
   <%= text_field_tag :search_by_arrival, nil, placeholder: 'Enter Arrival Station' %>
-  <%= number_field_tag :search_by_rating, nil, placeholder: 'Enter Rating', steps: 0.1 %>
+  <%= number_field_tag :search_by_rating, nil, placeholder: 'Enter Rating', steps: 0.1,in: 0..5 %>
   <%= submit_tag "Search" %>
 <% end %>
 <br>

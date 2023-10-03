@@ -53,7 +53,7 @@
 <%= link_to 'Book Ticket for yourself', book_now_tickets_path(train_id: @train.id), method: :post, data: { confirm: "Do you want to book the ticket? \n"+@train.ticket_price.to_s+' dollars will be deducted' } %>
 <br><br>
 <%= form_with url: book_now_tickets_path(train_id: @train.id), method: :post, local: true, data: { confirm: "Do you want to book the ticket? \n"+@train.ticket_price.to_s+' dollars will be deducted' } do %>
-  <%= text_field_tag :Add_passenger %>
+  <%= text_field_tag :Add_passenger,nil, placeholder: 'Enter User Email' %>
   <%= submit_tag "Book for another passenger" %>
 <% end %>
 <br><br>

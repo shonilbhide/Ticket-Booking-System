@@ -5,5 +5,5 @@ class Passenger < ApplicationRecord
 
     validates :email, presence: true,format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }, uniqueness: true
     validates :phone_number, presence: true, format: { with: /\A\d{3}-\d{3}-\d{4}\z/ }
-    validates :credit_number, presence: true, format: { with: /\A\d{10}\z/ }
+    validates :credit_number, presence: true, format: { with: /\A\d{4}-\d{4}-\d{4}-\d{4}\z/ }
 end
