@@ -1,0 +1,14 @@
+<h2>Create Reviews</h2>
+<br><br>
+<%= form_with url: admin_access_review_path, method: :post, local: true do %>
+  <%= text_field_tag :search_passenger_email,nil, placeholder: "Enter Passenger email" %>
+  <br><br>
+  <%= text_field_tag :search_train_number,nil, placeholder: "Enter Train Number"%>
+  <br><br>
+  <%= number_field_tag :entered_rating,nil, placeholder: "Rating", in: 0..5 %>
+  <br><br>
+  <%= text_field_tag :entered_text,nil, placeholder: "Enter Feedback"%>
+  <br><br>
+  <%= submit_tag "Create" %>
+<% end %>
+

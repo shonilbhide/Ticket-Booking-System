@@ -70,6 +70,26 @@ class TicketsController < ApplicationController
     existing_ticket = Ticket.find_by(passenger: current_user, train: @train)
   end
 
+  def admin_access
+    @admin = Admin.first
+    if params[:search_passenger_email].present? and params[:search_train_number].present?
+      selected_passenger = Passenger.find_by_email(params[:search_passenger_email])
+      selected_train = Train.find_by(train_number: params[:search_train_number])
+    if selected_passenger and selected_train
+     if selected_train.seats_left > 0
+      Ticket.create(passenger: selected_passenger,train: selected_train,creator_id: selected_passenger.id)
+      selected_train.update(seats_left: selected_train.seats_left - 1)
+      redirect_to show_tickets_admin_path(@admin), notice: 'Ticket Created!'
+     else
+      redirect_to show_tickets_admin_path(@admin), notice: 'Train Capacity full!'
+     end
+    else
+      redirect_to show_tickets_admin_path(@admin), notice: 'Either passenger or train does not exist!'
+    end
+    end
+  end
+
+
   def book_now
     @train = set_train
    

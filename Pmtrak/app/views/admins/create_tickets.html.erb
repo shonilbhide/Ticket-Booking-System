@@ -1,0 +1,8 @@
+<h4>Create tickets</h4>
+<br><br>
+<%= form_with url: admin_access_ticket_path, method: :post, local: true do %>
+  <%= text_field_tag :search_passenger_email,nil, placeholder: "Enter Passenger email" %>
+  <%= text_field_tag :search_train_number,nil, placeholder: "Enter Train Number"%>
+  <%= submit_tag "Create" %>
+<% end %>
+

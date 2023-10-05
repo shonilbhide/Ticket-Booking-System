@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+<br>
 <h1>All Tickets</h1>
 
 <table>
@@ -43,6 +45,7 @@
     <% end %>
   </tbody>
 </table>
-
-
+<br>
+<%= link_to 'Create New Tickets', create_tickets_admin_path(@admin) %>
+<br><br>
 <%= link_to 'Back', admin_path(@admin) %>

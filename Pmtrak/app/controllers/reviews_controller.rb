@@ -58,6 +58,26 @@ class ReviewsController < ApplicationController
     end
   end
 
+
+  def admin_access
+    @admin = Admin.first
+    if params[:search_passenger_email].present? and params[:search_train_number].present?
+      selected_passenger = Passenger.find_by_email(params[:search_passenger_email])
+      selected_train = Train.find_by(train_number: params[:search_train_number])
+    if selected_passenger and selected_train
+     if params[:entered_rating].present?
+      Review.create(passenger: selected_passenger,train: selected_train,rating: params[:entered_rating], feedback:params[:entered_text])
+      redirect_to show_reviews_admin_path(@admin), notice: 'Review Created!'
+     else
+      redirect_to show_reviews_admin_path(@admin), notice: 'Enter Rating'
+     end
+    else
+      redirect_to show_reviews_admin_path(@admin), notice: 'Either passenger or train does not exist!'
+    end
+    end
+  end
+
+
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
     @passenger = current_user

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :tickets, only: [:destroy, :edit, :update] do
     post 'book_now', on: :collection
+    post 'admin_access', on: :member
     get 'book', on: :member
   end
   resources :passengers, except: [:index] do
@@ -11,7 +12,9 @@ Rails.application.routes.draw do
     get 'display', on: :member
     get 'show_booked_tickets', on: :member
   end
-  resources :reviews, except: [:index, :show]
+  resources :reviews, except: [:index, :show] do
+    post 'admin_access', on: :member
+  end
   resources :trains, except: [:index] do
   resources :reviews, except: [:index, :show]
     get 'train_reviews', on: :member
@@ -23,6 +26,8 @@ Rails.application.routes.draw do
     get 'show_tickets', on: :member
     get 'show_reviews', on: :member
     get 'show_train_customers', on: :member
+    get 'create_tickets', on: :member
+    get 'create_reviews', on: :member
   end
   get 'display', to: "admins#display", as: 'display_admin'
   root 'home#index'
