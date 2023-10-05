@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2023_09_30_201543) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "passenger_id", null: false
     t.integer "train_id", null: false
-    t.integer "creator_id", null: false
+    t.integer "creator_id"
     t.index ["creator_id"], name: "index_tickets_on_creator_id"
     t.index ["passenger_id"], name: "index_tickets_on_passenger_id"
     t.index ["train_id"], name: "index_tickets_on_train_id"

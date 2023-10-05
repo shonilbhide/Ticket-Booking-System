@@ -40,9 +40,18 @@ class ApplicationController < ActionController::Base
       redirect_to root_path unless logged_in?
     end
 
+    # def authorized_admin
+    #   if !logged_in? || !is_admin?
+    #     if !is_passenger?
+    #       redirect_to passenger_path(@current_user), alert: "Invalid Action"
+    #     else
+    #       redirect_to logout_path, alert: "Invalid Action"
+    #     end
+    #   end
+    # end
     def authorized_admin
       if !logged_in? || !is_admin?
-        if !is_passenger?
+        if @current_user && is_passenger?
           redirect_to passenger_path(@current_user), alert: "Invalid Action"
         else
           redirect_to logout_path, alert: "Invalid Action"
