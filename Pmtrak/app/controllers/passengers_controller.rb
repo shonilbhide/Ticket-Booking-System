@@ -10,12 +10,17 @@ class PassengersController < ApplicationController
 
   def my_trips
     @passenger = Passenger.find(params[:id])
+    if (@passenger != current_user)
+      redirect_to my_trips_passenger_path(current_user)
+    end
     @booked_trains = @passenger.tickets.includes(:train).map(&:train)
     @reviews = Review.where(passenger: @passenger)
   end
 
   def user_reviews
     @passenger = Passenger.find(params[:id])
+    if (@passenger != current_user)
+      redirect_to user_reviews_passenger_path(current_user)
     @reviews = @passenger.reviews
   end
 

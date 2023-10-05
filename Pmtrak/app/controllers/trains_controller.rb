@@ -1,5 +1,6 @@
 class TrainsController < ApplicationController
   before_action :set_train, only: %i[ show edit update destroy ]
+  before_action :authorized_admin, only: %i[new edit]
 
   # GET /trains or /trains.json
   def index
