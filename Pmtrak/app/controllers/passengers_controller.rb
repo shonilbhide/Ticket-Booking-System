@@ -21,6 +21,7 @@ class PassengersController < ApplicationController
     @passenger = Passenger.find(params[:id])
     if (@passenger != current_user)
       redirect_to user_reviews_passenger_path(current_user)
+    end
     @reviews = @passenger.reviews
   end
 
